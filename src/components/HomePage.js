@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Browse = () => {
+const HomePage = () => {
   return (
     <div>
-      Browse
+      HOmepage
     </div>
   )
 }
 
-export default Browse
+export default HomePage

@@ -8,6 +8,7 @@ import {  updateProfile } from "firebase/auth";
 
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/UserSlice';
+import NavBar from './NavBar';
 
 const Login = () => {
  const [isSignInform,setisSignInform]=useState(true)
@@ -114,6 +115,7 @@ const dispatch=useDispatch()
           onClick={toggleSignin}>{isSignInform ? "New to career? Sign Up" : "Already registered? Log In"}</p>
        </form>
       </div>
+      <NavBar/>
     </div>
   )
 }

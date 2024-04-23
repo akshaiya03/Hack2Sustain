@@ -1,0 +1,1 @@
+export const REACT_APP_GOOGLE_MAPS_API_KEY= process.env.pk.eyJ1IjoiYWtzaGFpeWEwMyIsImEiOiJjbHZheDZzajgwMmpxMnFwMXltbjJyaWUzIn0.shJaovnU39irR3ku4Mjwwg

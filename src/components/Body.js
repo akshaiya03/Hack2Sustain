@@ -8,6 +8,7 @@ import {  onAuthStateChanged } from "firebase/auth";
 import { auth } from '../utils/firebase'
 import { addUser, removeUser } from '../utils/UserSlice'
 import Browse from './Browse'
+import HomePage from './HomePage'
 const Body = () => {
     const dispatch=useDispatch()
     const approuter=createBrowserRouter([
@@ -22,6 +23,10 @@ const Body = () => {
         {
             path:"/browse",
             element:<Browse/>
+        },
+        {
+          path:"/Home",
+          element:<HomePage/>
         }
     ])
     useEffect(()=>{
