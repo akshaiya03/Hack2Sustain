@@ -7,8 +7,8 @@ const LandingPage = () => {
     <div>
       <div className='md:flex'>
       <div className='md:w-[700px]'>
-        <h1 className='sm: font-bold text-4xl sm: text-center pt-14'>Careerguidance</h1>
-      <p className='sm: text-2xl p-5 m-2 text-center md:text-3xl font-semibold'>Navigate your career path with confidence. Discover your potential today and embark on a journey to success. Get started now!"</p>
+        <h1 className='sm: font-bold text-4xl sm: text-center pt-14'>Loren epsum</h1>
+      <p className='sm: text-2xl p-5 m-2 text-center md:text-3xl font-semibold'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ornare mauris arcu, in consectetur tortor cursus et. Vestibulum aliquet felis id urna consectetur blandit. Nunc ex arcu, mollis sed lacinia at, porttitor sed justo. Nulla tempor mauris in convallis hendrerit. Nulla aliquet sapien ac metus tincidunt auctor.</p>
       <button
       onClick={()=>{
         navigate("/login")

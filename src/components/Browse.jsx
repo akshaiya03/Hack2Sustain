@@ -1,8 +1,6 @@
 import  React,{useEffect, useRef, useState} from 'react';
-import ReactMapGL ,{FullscreenControl,GeolocateControl,Marker,NavigationControl}from 'react-map-gl';
+import ReactMapGL ,{FullscreenControl,GeolocateControl,NavigationControl}from 'react-map-gl';
 import NavBar from './NavBar';
-
-
 import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
  
@@ -11,7 +9,7 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
   const [viewState, setViewState] = useState({
     longitude:80.1963662,
     latitude: 13.2106779,
-    zoom: 7.5
+    zoom: 10
   });
   const mapRef = useRef();
 
@@ -35,14 +33,29 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
   useEffect(() => {
   if (mapRef.current) {
     const map = mapRef.current.getMap();
+
+    if (map.getSource('directions')) {
+      map.removeSource('directions');
+    }
+
     const directions = new MapboxDirections({
       accessToken:process.env.REACT_APP_MAPBOX_TOKEN,
       unit: 'metric',
       profile: 'mapbox/driving',
       controls: { instructions: true }
     });
+    directions.on('route', (event) => {
+      const routeData = event.route; // Access the route data
+      const data = routeData[0].legs[0].steps;
+      const instructions = data.map((step) => step?.maneuver?.instruction);
+      console.log(instructions);
+      const value = new SpeechSynthesisUtterance(instructions);
+      value.rate = 0.5;
+      window.speechSynthesis.speak(value)
+    });
 
-    map.addControl(directions, 'top-left');
+    map.addControl(directions, 'top-left' );
+
   }
 }, [mapRef.current]);
 
@@ -50,14 +63,14 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
  
   const handleclick=(e)=>{
     const newEnd=e.lngLat
-    const endPoint =Object.keys(newEnd).map((item,i)=>newEnd[item])
+    const endPoint =[newEnd.lng, newEnd.lat]
     console.log(endPoint)
     setEnd(endPoint)
 
   }
   
   return (
-  <div className='m-0 p-0'>
+  <div>
   <ReactMapGL
     {...viewState}
     onClick={handleclick}
@@ -70,7 +83,7 @@ import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-direct
   <GeolocateControl />
   <FullscreenControl/>  
   <NavigationControl/>
-  <Marker longitude={start[0]} latitude={start[1]}/>
+  
   </ReactMapGL>
   <NavBar/>
   </div>
